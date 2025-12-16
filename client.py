@@ -1,5 +1,6 @@
 import socket 
 import threading 
+import os
 import sys
 import time
 
@@ -28,10 +29,14 @@ def recieve_msg(s):
 
             if not msg:
                 print("Connection closed by server.")
+                s.close()
+                os._exit(0)
                 break
 
             if msg.decode() == "exit": 
                 print("Connection closed by the server..")
+                s.close()
+                os._exit(0)
                 break
 
             print(f"Server: {msg.decode()}") 
