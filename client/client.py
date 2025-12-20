@@ -2,15 +2,29 @@ import socket
 import threading 
 import sys
 import time
+import argparse
 from .sender import send_msg
 from .reciever import recieve_msg
 
 def main():
+    parser = argparse.ArgumentParser(description="Basic multi-client chat system")
+    parser.add_argument(
+        metavar="IPv4",
+        dest="ip",
+        help = "IP address of the system"
+    )
+    parser.add_argument(
+        metavar="port",
+        dest="port",
+        type=int,
+        help="Port to connect",
+    )
+    args = parser.parse_args()
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
     while True:
         try:
-            s.connect(("127.0.0.1", 12345))
+            s.connect((args.ip, args.port))
             break
         except (ConnectionRefusedError, OSError):
             time.sleep(1)
