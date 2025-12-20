@@ -16,7 +16,7 @@ def recieve_msg(sock):
                 os._exit(0)
                 break
 
-            print(f"Server: {msg.decode()}") 
+            print(f"{msg.decode()}") 
         except OSError:
             break
         except KeyboardInterrupt:
